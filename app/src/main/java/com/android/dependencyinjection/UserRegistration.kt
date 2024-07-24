@@ -1,8 +1,8 @@
 package com.android.dependencyinjection
 
-class UserRegistration {
-    val emailService = EmailService()
-    val userRepository=UserRepository()
+class UserRegistration(val emailService: EmailService,
+                       val userRepository: UserRepository
+) {
 
     fun registerUser(email: String,password: String){
         userRepository.saveUser(email,password)

@@ -17,14 +17,15 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             DependencyInjectionTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
-                ) {
-                    Greeting("Android")
-                }
-            }
+
+                val emailService =EmailService()
+                val userRepository=UserRepository()
+                val userRegistration = UserRegistration(emailService,userRepository)
+                userRegistration.registerUser("@akgec.ac.in ","12345")
+
+                // we have created this manually therefore if there are 10 objects we have to do this everywhere so we use dagger
+                // so that it can be done at an instance
+             }
         }
     }
 }
