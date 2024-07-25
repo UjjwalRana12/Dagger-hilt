@@ -13,34 +13,37 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.android.dependencyinjection.ui.theme.DependencyInjectionTheme
 
 class MainActivity : ComponentActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        // Initialize Dagger component and get UserRegistration service
+        val userRegistration = DaggerUserRegistrationComponent.create().getUserRegistrationService()
+
         setContent {
             DependencyInjectionTheme {
-
-                val emailService =EmailService()
-                val userRepository=UserRepository()
-                val userRegistration = UserRegistration(emailService,userRepository)
-                userRegistration.registerUser("@akgec.ac.in ","12345")
-
-                // we have created this manually therefore if there are 10 objects we have to do this everywhere so we use dagger
-                // so that it can be done at an instance
-             }
+                Surface(
+                    modifier = Modifier.fillMaxSize(),
+                    color = MaterialTheme.colorScheme.background
+                ) {
+                    Greeting("Android")
+                }
+            }
         }
+
+        // Use the UserRegistration service
+        userRegistration.registerUser("example@example.com", "password123")
     }
 }
 
 @Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
+fun Greeting(name: String) {
+    Text(text = "Hello $name!")
 }
 
 @Preview(showBackground = true)
 @Composable
-fun GreetingPreview() {
+fun DefaultPreview() {
     DependencyInjectionTheme {
         Greeting("Android")
     }

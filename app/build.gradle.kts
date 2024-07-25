@@ -1,11 +1,15 @@
+import org.jetbrains.kotlin.kapt3.base.Kapt.kapt
+
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    id ("kotlin-kapt")
+
 }
 
 android {
     namespace = "com.android.dependencyinjection"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.android.dependencyinjection"
@@ -66,4 +70,11 @@ dependencies {
     androidTestImplementation("androidx.compose.ui:ui-test-junit4")
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
+    debugImplementation("com.google.dagger:dagger:2.29")
+    kapt ("com.google.dagger:dagger-compiler:2.29")
+
+    // Dagger - Hilt
+    implementation ("com.google.dagger:dagger:2.40.5")
+    kapt ("com.google.dagger:dagger-compiler:2.40.5")
+
 }

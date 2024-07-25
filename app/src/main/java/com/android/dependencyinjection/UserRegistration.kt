@@ -1,6 +1,8 @@
 package com.android.dependencyinjection
 
-class UserRegistration(val emailService: EmailService,
+import javax.inject.Inject
+
+class UserRegistration @Inject constructor(val emailService: EmailService,
                        val userRepository: UserRepository
 ) {
 
